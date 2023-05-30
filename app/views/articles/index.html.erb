@@ -1,15 +1,56 @@
-<h1>Books</h1>
+<h1>Listing Books</h1>
+<p align="right" style="font-size:25px;"><%= link_to "Add Book", new_article_path %></p>
 
-You have  <%= Article.public_count %> Book!
+<table border="3px">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th colspan="3">Modifications</th>
+    </tr>
+  </thead>
 
-<ul>
-  <% @articles.each do |article| %>
-    <% unless article.archived? %>
-      <li>
-        <%= link_to article.title, article %>
-      </li>
+  <tbody>
+    <% @articles.each do |article|%>
+    <tr>
+
+      <td><strong><%= article.title %></strong></td>
+        <td><%= article.body %></td> 
+        <td><%= link_to "Show", article %></td>
+        <td><%= link_to "Edit", edit_article_path(article) %></td>
+        <td><%= link_to "Destroy", article, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+      </tr>
+      
+    
+      </ol>
     <% end %>
-  <% end %>
-</ul>
+  </tbody>
+</table>
+<h1>Some important Information </h1>
 
-<%= link_to "Add Book", new_article_path %>
+<%= form_with model: @article do |form| %>
+
+  <%= form.label :name, "Enter your Date of Birth"%>
+  <%= form.date_field :born_on %><br><br>
+  <%= form.label :name, "Enter your Time of Birth"%>
+  <%= form.time_field :started_at %><br><br>
+  <%= form.label :name, "Enter your month of Birth"%>
+  <%= form.month_field :birthday_month %><br><br>
+  <%= form.label :name, "Enter your week of Birth"%>
+  <%= form.week_field :birthday_week %><br><br>
+  <%= form.label :name, "Enter your Name"%>
+  <%= form.search_field :name %><br><br>
+  <%= form.label :name, "Enter your Home Address"%>
+  <%= form.email_field :address %><br><br>
+  <%= form.label :name, "Enter your Phone Number"%>
+  <%= form.telephone_field :phone %><br><br>
+  <%= form.label :name, "Select color"%>
+  <%= form.color_field :favorite_color %>
+
+<% end %>
+
+
+
+
+<br>
+
