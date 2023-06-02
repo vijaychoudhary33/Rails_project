@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  paginates_per 5
   before_save :update_book_name
   def update_book_name
     self.title =title.downcase
@@ -16,4 +17,5 @@ class Article < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true, length: { minimum: 10 }
+  
 end
